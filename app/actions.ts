@@ -45,30 +45,36 @@ export async function signInAction(
   const requestHeaders = await headers();
 
   try {
-    const existingUser = await prisma.user.findUnique({
-      where: { email: SHARED_AUTH_EMAIL },
-      select: { id: true },
+    const currentSession = await auth.api.getSession({
+      headers: requestHeaders,
     });
 
-    if (existingUser) {
-      await auth.api.signInEmail({
-        body: {
-          email: SHARED_AUTH_EMAIL,
-          password,
-          rememberMe: true,
-        },
-        headers: requestHeaders,
+    if (!currentSession) {
+      const existingUser = await prisma.user.findUnique({
+        where: { email: SHARED_AUTH_EMAIL },
+        select: { id: true },
       });
-    } else {
-      await auth.api.signUpEmail({
-        body: {
-          name: "Gelir Gider",
-          email: SHARED_AUTH_EMAIL,
-          password,
-          rememberMe: true,
-        },
-        headers: requestHeaders,
-      });
+
+      if (existingUser) {
+        await auth.api.signInEmail({
+          body: {
+            email: SHARED_AUTH_EMAIL,
+            password,
+            rememberMe: true,
+          },
+          headers: requestHeaders,
+        });
+      } else {
+        await auth.api.signUpEmail({
+          body: {
+            name: "Gelir Gider",
+            email: SHARED_AUTH_EMAIL,
+            password,
+            rememberMe: true,
+          },
+          headers: requestHeaders,
+        });
+      }
     }
 
     const member = await prisma.member.upsert({

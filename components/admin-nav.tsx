@@ -12,6 +12,9 @@ export function AdminNav({ active }: { active: "overview" | "leads" | "profiles"
       <Link href="/admin/leads" className={active === "leads" ? "admin-nav-active" : ""}>
         Leads
       </Link>
+      <Link href="/sign-in?switch=1" className="admin-nav-switch">
+        Kişi değiştir
+      </Link>
     </nav>
   );
 }
