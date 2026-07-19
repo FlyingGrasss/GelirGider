@@ -20,8 +20,8 @@ type LeadAction = (
 ) => Promise<LeadFormState>;
 
 const options: Array<{ value: LeadType; label: string }> = [
-  { value: "MESSAGE", label: "Message" },
-  { value: "CALL", label: "Call" },
+  { value: "MESSAGE", label: "Mesaj" },
+  { value: "CALL", label: "Arama" },
   { value: "MAIL", label: "Mail" },
   { value: "ORDER", label: "Sipariş" },
 ];

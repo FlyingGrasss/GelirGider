@@ -19,8 +19,8 @@ const dateFormatter = new Intl.DateTimeFormat("tr-TR", {
 });
 
 const leadTypeLabels = {
-  MESSAGE: "Message",
-  CALL: "Call",
+  MESSAGE: "Mesaj",
+  CALL: "Arama",
   MAIL: "Mail",
   ORDER: "Sipariş",
 } as const;

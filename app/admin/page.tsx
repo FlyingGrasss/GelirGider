@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { signOutAction } from "@/app/actions";
 import { AdminNav } from "@/components/admin-nav";
+import { ComparisonSection } from "@/components/comparison-section";
 import { DeleteTransactionButton } from "@/components/delete-transaction-button";
 import { EditTransactionModal } from "@/components/edit-transaction-modal";
 import { TransactionForm } from "@/components/transaction-form";
@@ -26,12 +27,16 @@ const dateFormatter = new Intl.DateTimeFormat("tr-TR", {
 export default async function AdminPage() {
   const session = await requireSession();
   const currentMember = await requireMember();
-  const [transactions, members] = await Promise.all([
+  const [transactions, allTransactions, members] = await Promise.all([
     prisma.transaction.findMany({
       where: { userId: session.user.id },
       include: { paidByMember: { select: { name: true } } },
       orderBy: [{ date: "desc" }, { createdAt: "desc" }],
       take: 100,
+    }),
+    prisma.transaction.findMany({
+      where: { userId: session.user.id },
+      select: { type: true, amountCents: true, paidByMemberId: true },
     }),
     prisma.member.findMany({
       orderBy: { name: "asc" },
@@ -39,15 +44,48 @@ export default async function AdminPage() {
     }),
   ]);
 
-  const income = transactions
+  const income = allTransactions
     .filter((transaction) => transaction.type === "INCOME")
     .reduce((sum, transaction) => sum + transaction.amountCents, 0);
-  const expense = transactions
+  const expense = allTransactions
     .filter((transaction) => transaction.type === "EXPENSE")
     .reduce((sum, transaction) => sum + transaction.amountCents, 0);
   const balance = income - expense;
   const incomeCount = transactions.filter((item) => item.type === "INCOME").length;
   const expenseCount = transactions.filter((item) => item.type === "EXPENSE").length;
+
+  const comparisonTotals = new Map(
+    members.map((member) => [member.id, { spentCents: 0, receivedCents: 0 }]),
+  );
+  const splitMemberCount = Math.max(members.length, 1);
+
+  for (const transaction of allTransactions) {
+    const key = transaction.type === "EXPENSE" ? "spentCents" : "receivedCents";
+
+    if (transaction.paidByMemberId) {
+      const totals = comparisonTotals.get(transaction.paidByMemberId);
+      if (totals) totals[key] += transaction.amountCents;
+      continue;
+    }
+
+    const equalShare = transaction.amountCents / splitMemberCount;
+    for (const totals of comparisonTotals.values()) {
+      totals[key] += equalShare;
+    }
+  }
+
+  const equalNetCents = (income - expense) / splitMemberCount;
+  const comparisonRows = members.map((member) => {
+    const totals = comparisonTotals.get(member.id) ?? { spentCents: 0, receivedCents: 0 };
+    const netCents = totals.receivedCents - totals.spentCents;
+
+    return {
+      name: member.name,
+      ...totals,
+      netCents,
+      settlementCents: netCents - equalNetCents,
+    };
+  });
 
   return (
     <main className="admin-page min-h-screen px-4 py-5 sm:px-6 sm:py-8">
@@ -93,6 +131,12 @@ export default async function AdminPage() {
             <p className="mt-4 text-xs text-slate-400">{expenseCount} gider kaydı</p>
           </div>
         </section>
+
+        <ComparisonSection
+          rows={comparisonRows}
+          totalSpentCents={expense}
+          totalReceivedCents={income}
+        />
 
         <section className="grid gap-6 lg:grid-cols-[minmax(0,0.78fr)_minmax(0,1.22fr)]">
           <section className="panel h-fit">
