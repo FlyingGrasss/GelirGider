@@ -4,5 +4,5 @@ import { auth } from "@/lib/auth";
 
 export default async function Home() {
   const session = await auth.api.getSession({ headers: await headers() });
-  redirect(session ? "/dashboard" : "/sign-in");
+  redirect(session ? "/admin" : "/sign-in");
 }

@@ -137,7 +137,7 @@ export function TransactionForm({
       <button
         type="submit"
         disabled={pending}
-        className="w-full rounded-2xl bg-slate-900 px-5 py-3.5 text-sm font-bold text-white transition hover:bg-slate-700 disabled:cursor-wait disabled:opacity-60"
+        className="w-full rounded-2xl bg-slate-900 px-5 py-3.5 text-sm font-bold text-white transition hover:bg-slate-700 disabled:opacity-60"
       >
         {pending ? "Ekleniyor…" : "Kaydı ekle"}
       </button>

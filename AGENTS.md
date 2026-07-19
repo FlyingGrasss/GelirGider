@@ -31,6 +31,7 @@ This project uses **pnpm** exclusively. Never use `npm` or `yarn`.
 - Never use browser-native confirmation dialogs such as `window.confirm`.
 - Destructive actions must use a custom in-app modal with a clear cancel action.
 - Editing existing entries must happen in an in-place modal, not by navigating to a separate edit page.
+- Never use a loading cursor such as `cursor-wait`; keep the normal cursor while actions are pending.
 
 ## Verification Discipline
 - Keep verification lightweight and proportional to the change.

@@ -1,0 +1,64 @@
+import type { Metadata } from "next";
+import Link from "next/link";
+import { AdminNav } from "@/components/admin-nav";
+import { requireSession } from "@/lib/auth-helpers";
+import { prisma } from "@/lib/db";
+
+export const metadata: Metadata = {
+  title: "Profil kartları | Admin",
+};
+
+export default async function ProfilesPage() {
+  await requireSession();
+  const profiles = await prisma.profile.findMany({
+    orderBy: { createdAt: "desc" },
+    include: { _count: { select: { facilities: true } } },
+  });
+
+  return (
+    <main className="admin-page min-h-screen px-4 py-5 sm:px-6 sm:py-8">
+      <div className="mx-auto max-w-6xl">
+        <header className="mb-8 flex flex-wrap items-end justify-between gap-4">
+          <div>
+            <p className="eyebrow">Admin</p>
+            <h1 className="mt-2 text-3xl font-black tracking-tight text-slate-950">Profil kartları</h1>
+            <p className="mt-2 text-sm text-slate-500">Kişisel link kartlarını buradan oluştur ve yönet.</p>
+          </div>
+          <Link href="/admin/profiles/new" className="rounded-2xl bg-slate-900 px-5 py-3.5 text-sm font-bold text-white transition hover:bg-slate-700">+ Yeni profil</Link>
+        </header>
+
+        <AdminNav active="profiles" />
+
+        {profiles.length === 0 ? (
+          <section className="panel mt-6">
+            <div className="empty-state">
+              <p className="font-bold text-slate-700">Henüz profil kartı yok</p>
+              <p className="mt-1 text-sm text-slate-400">İlk kartı oluşturarak /slug adresini yayınlayabilirsin.</p>
+            </div>
+          </section>
+        ) : (
+          <section className="mt-6 grid gap-4 md:grid-cols-2">
+            {profiles.map((profile) => (
+              <article key={profile.id} className="panel">
+                <div className="flex items-start justify-between gap-4">
+                  <div>
+                    <p className="eyebrow">/{profile.slug}</p>
+                    <h2 className="mt-1 text-xl font-black text-slate-950">{profile.name}</h2>
+                    <p className="mt-1 text-sm text-slate-500">{profile.title}</p>
+                    <p className="mt-3 text-xs text-slate-400">{profile._count.facilities} yönetilen tesis</p>
+                  </div>
+                  <span className="rounded-full bg-emerald-50 px-3 py-1 text-xs font-bold text-emerald-700">Aktif</span>
+                </div>
+                <div className="mt-6 flex flex-wrap gap-3">
+                  <Link href={`/admin/profiles/${profile.id}`} className="rounded-xl bg-slate-900 px-4 py-2.5 text-sm font-bold text-white transition hover:bg-slate-700">Düzenle</Link>
+                  <Link href={`/${profile.slug}`} target="_blank" rel="noreferrer" className="rounded-xl border border-slate-200 px-4 py-2.5 text-sm font-bold text-slate-600 transition hover:bg-slate-50">Public sayfa ↗</Link>
+                  <Link href={`/${profile.slug}/admin`} target="_blank" rel="noreferrer" className="rounded-xl border border-slate-200 px-4 py-2.5 text-sm font-bold text-slate-600 transition hover:bg-slate-50">Owner admin ↗</Link>
+                </div>
+              </article>
+            ))}
+          </section>
+        )}
+      </div>
+    </main>
+  );
+}

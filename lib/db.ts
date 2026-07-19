@@ -8,7 +8,7 @@ const globalForDb = globalThis as unknown as {
   prismaSchemaVersion?: string;
 };
 
-const prismaSchemaVersion = "members-and-payment-split-v1";
+const prismaSchemaVersion = "profiles-and-leads-v1";
 
 const pool =
   globalForDb.pool ??

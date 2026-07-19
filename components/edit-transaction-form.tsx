@@ -155,7 +155,7 @@ export function EditTransactionForm({
         <button
           type="submit"
           disabled={pending}
-          className="flex-1 rounded-2xl bg-slate-900 px-5 py-3.5 text-sm font-bold text-white transition hover:bg-slate-700 disabled:cursor-wait disabled:opacity-60"
+          className="flex-1 rounded-2xl bg-slate-900 px-5 py-3.5 text-sm font-bold text-white transition hover:bg-slate-700 disabled:opacity-60"
         >
           {pending ? "Kaydediliyor…" : "Değişiklikleri kaydet"}
         </button>

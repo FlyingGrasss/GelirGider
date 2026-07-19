@@ -14,7 +14,7 @@ export default async function SignInPage() {
   ]);
 
   if (session && member) {
-    redirect("/dashboard");
+    redirect("/admin");
   }
 
   return (

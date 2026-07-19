@@ -18,6 +18,7 @@ model User {
   sessions      Session[]
   accounts      Account[]
   transactions  Transaction[]
+  leads         Lead[]
 
   @@map("user")
 }
@@ -27,6 +28,64 @@ model Member {
   name             String        @unique
   createdAt        DateTime      @default(now())
   paidTransactions Transaction[] @relation("paidBy")
+}
+
+model Profile {
+  id                     String           @id @default(cuid())
+  slug                   String           @unique
+  passwordHash           String
+  imageUrl               String?
+  showImage              Boolean          @default(true)
+  name                   String
+  title                  String
+  title2                 String?
+  callNumber             String?
+  callEnabled            Boolean          @default(true)
+  callFullWidth          Boolean          @default(false)
+  whatsappNumber         String?
+  whatsappEnabled        Boolean          @default(true)
+  whatsappFullWidth      Boolean          @default(false)
+  email                  String?
+  emailEnabled           Boolean          @default(true)
+  emailFullWidth         Boolean          @default(false)
+  linkedinUrl            String?
+  linkedinEnabled        Boolean          @default(true)
+  linkedinFullWidth      Boolean          @default(false)
+  instagramUrl           String?
+  instagramEnabled       Boolean          @default(true)
+  instagramFullWidth     Boolean          @default(false)
+  locationUrl            String?
+  locationEnabled        Boolean          @default(true)
+  locationFullWidth      Boolean          @default(true)
+  contactEnabled         Boolean          @default(true)
+  contactFullWidth       Boolean          @default(true)
+  facilitiesHeading      String           @default("Bağlantılar")
+  createdAt              DateTime         @default(now())
+  updatedAt              DateTime         @updatedAt
+  facilities             ProfileFacility[]
+  sessions               ProfileSession[]
+}
+
+model ProfileFacility {
+  id        String  @id @default(cuid())
+  name      String
+  url       String
+  sortOrder Int     @default(0)
+  profileId String
+  profile   Profile @relation(fields: [profileId], references: [id], onDelete: Cascade)
+
+  @@index([profileId, sortOrder])
+}
+
+model ProfileSession {
+  id        String   @id @default(cuid())
+  tokenHash String   @unique
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+  profileId String
+  profile   Profile  @relation(fields: [profileId], references: [id], onDelete: Cascade)
+
+  @@index([profileId, expiresAt])
 }
 
 model Session {
@@ -81,6 +140,13 @@ enum TransactionType {
   EXPENSE
 }
 
+enum LeadType {
+  MESSAGE
+  CALL
+  MAIL
+  ORDER
+}
+
 model Transaction {
   id             String          @id @default(cuid())
   type           TransactionType
@@ -96,4 +162,19 @@ model Transaction {
 
   @@index([userId, date])
   @@index([paidByMemberId])
+}
+
+model Lead {
+  id           String   @id @default(cuid())
+  type         LeadType
+  personName   String
+  contactInfo  String?
+  followUpAt   DateTime?
+  details      String?
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  userId       String
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, followUpAt])
 }

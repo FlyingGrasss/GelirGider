@@ -89,7 +89,7 @@ export async function signInAction(
     return { error: "Giriş yapılamadı. Sunucu ayarlarını kontrol edin." };
   }
 
-  redirect("/dashboard");
+  redirect("/admin");
 }
 
 type PayerValidation = { id: string | null } | { error: string };
@@ -182,6 +182,7 @@ export async function addTransactionAction(
   });
 
   revalidatePath("/dashboard");
+  revalidatePath("/admin");
   return { success: "Kayıt eklendi." };
 }
 
@@ -259,7 +260,8 @@ export async function updateTransactionAction(
   });
 
   revalidatePath("/dashboard");
-  redirect("/dashboard");
+  revalidatePath("/admin");
+  redirect("/admin");
 }
 
 export async function deleteTransactionAction(formData: FormData) {
@@ -278,6 +280,7 @@ export async function deleteTransactionAction(formData: FormData) {
   });
 
   revalidatePath("/dashboard");
+  revalidatePath("/admin");
 }
 
 export async function signOutAction() {
