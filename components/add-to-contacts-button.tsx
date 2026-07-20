@@ -20,14 +20,12 @@ export function AddToContactsButton({
   url: string;
   fullWidth: boolean;
 }) {
-  const contactTitle = [title, title2].filter(Boolean).join(" / ");
-
   function downloadContact() {
     const lines = [
       "BEGIN:VCARD",
       "VERSION:3.0",
       `FN:${escapeVCard(name)}`,
-      `TITLE:${escapeVCard(contactTitle)}`,
+      `TITLE:${escapeVCard([title, title2].filter(Boolean).join(" / "))}`,
       phone ? `TEL;TYPE=CELL:${escapeVCard(phone)}` : "",
       email ? `EMAIL:${escapeVCard(email)}` : "",
       `URL:${escapeVCard(url)}`,
@@ -42,26 +40,8 @@ export function AddToContactsButton({
     URL.revokeObjectURL(downloadUrl);
   }
 
-  function addToContacts() {
-    if (!/Android/i.test(window.navigator.userAgent)) {
-      downloadContact();
-      return;
-    }
-
-    const extras = [
-      `S.name=${encodeURIComponent(name)}`,
-      phone ? `S.phone=${encodeURIComponent(phone)}` : "",
-      email ? `S.email=${encodeURIComponent(email)}` : "",
-      contactTitle ? `S.job_title=${encodeURIComponent(contactTitle)}` : "",
-    ].filter(Boolean).join(";");
-
-    // Chrome on Android can hand this user-initiated intent to the Contacts app.
-    // The form opens pre-filled, so the user can review and save the contact.
-    window.location.href = `intent:#Intent;action=android.intent.action.INSERT;type=vnd.android.cursor.dir/contact;${extras};end`;
-  }
-
   return (
-    <button type="button" onClick={addToContacts} className={`profile-button ${fullWidth ? "profile-button-wide" : "profile-button-normal"}`}>
+    <button type="button" onClick={downloadContact} className={`profile-button ${fullWidth ? "profile-button-wide" : "profile-button-normal"}`}>
       <span className="profile-button-icon"><FaAddressBook /></span>
       <span>Kişilere Ekle</span>
     </button>
