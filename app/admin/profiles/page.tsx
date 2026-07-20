@@ -42,7 +42,7 @@ export default async function ProfilesPage() {
               <article key={profile.id} className="panel">
                 <div className="flex items-start justify-between gap-4">
                   <div>
-                    <p className="eyebrow normal-case tracking-normal">/{profile.slug.toLowerCase()}</p>
+                    <p className="eyebrow tracking-normal">/{profile.slug.toLowerCase()}</p>
                     <h2 className="mt-1 text-xl font-black text-slate-950">{profile.name}</h2>
                     <p className="mt-1 text-sm text-slate-500">{profile.title}</p>
                     <p className="mt-3 text-xs text-slate-400">{profile._count.facilities} bağlantı</p>
