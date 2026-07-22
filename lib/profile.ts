@@ -44,6 +44,32 @@ export function normalizeEmail(value: string) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(trimmed) ? trimmed : null;
 }
 
+export function normalizeIban(value: string) {
+  const normalized = value.replace(/\s+/g, "").toUpperCase();
+  return normalized || null;
+}
+
+export function isValidIban(value: string) {
+  if (!/^[A-Z]{2}\d{2}[A-Z0-9]{11,30}$/.test(value)) {
+    return false;
+  }
+
+  const rearranged = `${value.slice(4)}${value.slice(0, 4)}`;
+  let remainder = 0;
+
+  for (const character of rearranged) {
+    const digits = character >= "A" && character <= "Z"
+      ? String(character.charCodeAt(0) - 55)
+      : character;
+
+    for (const digit of digits) {
+      remainder = (remainder * 10 + Number(digit)) % 97;
+    }
+  }
+
+  return remainder === 1;
+}
+
 export function phoneHref(value: string | null) {
   if (!value?.trim()) {
     return null;

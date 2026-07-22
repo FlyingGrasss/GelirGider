@@ -345,6 +345,49 @@ textarea {
   background: linear-gradient(120deg, rgb(64 124 157 / 0.84) 0%, rgb(22 78 109 / 0.84) 52%, rgb(6 48 76 / 0.9) 100%);
 }
 
+.profile-iban-button {
+  justify-content: flex-start;
+  padding: 1rem 1.15rem;
+  text-align: left;
+}
+
+.profile-iban-content {
+  min-width: 0;
+  flex: 1;
+}
+
+.profile-iban-label,
+.profile-iban-status {
+  display: block;
+  color: rgb(226 232 240 / 0.66);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.profile-iban-value {
+  display: block;
+  margin-top: 0.35rem;
+  overflow-wrap: anywhere;
+  color: #f8fafc;
+  font-size: clamp(0.8rem, 2.4vw, 1.05rem);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+
+.profile-iban-status {
+  margin-top: 0.45rem;
+  color: rgb(226 232 240 / 0.62);
+  font-size: 0.68rem;
+  letter-spacing: 0.02em;
+  text-transform: none;
+}
+
+.profile-iban-status-error {
+  color: #fecdd3;
+}
+
 .profile-button-icon {
   display: grid;
   min-width: 3rem;

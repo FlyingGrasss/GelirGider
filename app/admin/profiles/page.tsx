@@ -44,7 +44,7 @@ export default async function ProfilesPage() {
                   <div>
                     <p className="eyebrow tracking-normal">/{profile.slug.toLowerCase()}</p>
                     <h2 className="mt-1 text-xl font-black text-slate-950">{profile.name}</h2>
-                    <p className="mt-1 text-sm text-slate-500">{profile.title}</p>
+                    {profile.title ? <p className="mt-1 text-sm text-slate-500">{profile.title}</p> : null}
                     <p className="mt-3 text-xs text-slate-400">{profile._count.facilities} bağlantı</p>
                   </div>
                   <span className="rounded-full bg-emerald-50 px-3 py-1 text-xs font-bold text-emerald-700">Aktif</span>

@@ -11,6 +11,7 @@ import {
   FaWhatsapp,
 } from "react-icons/fa6";
 import { AddToContactsButton } from "@/components/add-to-contacts-button";
+import { CopyIbanButton } from "@/components/copy-iban-button";
 import { prisma } from "@/lib/db";
 import {
   mailHref,
@@ -42,7 +43,7 @@ export async function generateMetadata({ params }: ProfilePageProps): Promise<Me
   }
 
   return {
-    title: `${profile.name} | ${profile.title}`,
+    title: `${profile.name}${profile.title ? ` | ${profile.title}` : ""}`,
     description: [profile.title, profile.title2].filter(Boolean).join(" — "),
   };
 }
@@ -98,8 +99,8 @@ export default async function ProfilePage({ params }: ProfilePageProps) {
             <img src={profile.imageUrl} alt="" className="profile-image" />
           ) : null}
           <h1 className="profile-name">{profile.name}</h1>
-          <div className="profile-divider" />
-          <p className="profile-title">{profile.title}</p>
+          {profile.title || profile.title2 ? <div className="profile-divider" /> : null}
+          {profile.title ? <p className="profile-title">{profile.title}</p> : null}
           {profile.title2 ? <p className="profile-title">{profile.title2}</p> : null}
         </header>
 
@@ -125,6 +126,7 @@ export default async function ProfilePage({ params }: ProfilePageProps) {
           {profile.instagramEnabled && profile.instagramUrl ? (
             <ProfileLinkButton href={profile.instagramUrl} label="Instagram" icon={<FaInstagram />} fullWidth={profile.instagramFullWidth} />
           ) : null}
+          {profile.ibanEnabled && profile.iban ? <CopyIbanButton iban={profile.iban} /> : null}
         </section>
 
         {profile.facilities.length > 0 ? (

@@ -40,7 +40,12 @@ function isUniqueConstraintError(error: unknown) {
 function profileData(fields: ProfileFields) {
   const { facilities, ...data } = fields;
   void facilities;
-  return data;
+  // Keep empty optional titles compatible with already-generated Prisma clients
+  // that still expect the pre-migration required field shape.
+  return {
+    ...data,
+    title: data.title ?? "",
+  };
 }
 
 async function replaceFacilities(

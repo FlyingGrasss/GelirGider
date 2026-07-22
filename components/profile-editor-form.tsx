@@ -14,8 +14,10 @@ export type EditableProfile = {
   imageUrl: string | null;
   showImage: boolean;
   name: string;
-  title: string;
+  title: string | null;
   title2: string | null;
+  iban: string | null;
+  ibanEnabled: boolean;
   callNumber: string | null;
   callEnabled: boolean;
   callFullWidth: boolean;
@@ -120,6 +122,8 @@ const emptyProfile: EditableProfile = {
   name: "",
   title: "",
   title2: null,
+  iban: null,
+  ibanEnabled: true,
   callNumber: null,
   callEnabled: true,
   callFullWidth: false,
@@ -187,16 +191,19 @@ export function ProfileEditorForm({
         <div className="grid gap-4 sm:grid-cols-2">
           <div>
             <label htmlFor="profile-slug" className="field-label">Slug</label>
+            {mode === "owner-edit" ? <input type="hidden" name="slug" value={profile.slug} /> : null}
             <input
               id="profile-slug"
-              name="slug"
-              required
-              readOnly={mode === "owner-edit"}
+              name={mode === "owner-edit" ? undefined : "slug"}
+              required={mode !== "owner-edit"}
+              disabled={mode === "owner-edit"}
               defaultValue={profile.slug}
               placeholder="ahmet-yazici"
-              className="field-input"
+              className="field-input disabled:cursor-default disabled:bg-slate-100 disabled:text-slate-400"
             />
-            <p className="mt-1 text-xs text-slate-400">/slug adresinin son parçası.</p>
+            <p className="mt-1 text-xs text-slate-400">
+              /slug adresinin son parçası. {mode === "owner-edit" ? "Yalnızca ana admin panelinden değiştirilebilir." : null}
+            </p>
           </div>
           {mode !== "owner-edit" ? (
             <div>
@@ -219,8 +226,8 @@ export function ProfileEditorForm({
             <input id="profile-name" name="name" required defaultValue={profile.name} className="field-input" />
           </div>
           <div>
-            <label htmlFor="profile-title" className="field-label">Başlık</label>
-            <input id="profile-title" name="title" required defaultValue={profile.title} placeholder="Satın Alma Müdürü" className="field-input" />
+            <label htmlFor="profile-title" className="field-label">Başlık (opsiyonel)</label>
+            <input id="profile-title" name="title" defaultValue={profile.title ?? ""} placeholder="Satın Alma Müdürü" className="field-input" />
           </div>
           <div className="sm:col-span-2">
             <label htmlFor="profile-title2" className="field-label">İkinci başlık (opsiyonel)</label>
@@ -250,6 +257,22 @@ export function ProfileEditorForm({
           <ButtonSetting label="Instagram" valueName="instagramUrl" enabledName="instagramEnabled" fullWidthName="instagramFullWidth" value={profile.instagramUrl} enabled={profile.instagramEnabled} fullWidth={profile.instagramFullWidth} placeholder="https://instagram.com/..." />
           <ButtonSetting label="Konum" valueName="locationUrl" enabledName="locationEnabled" fullWidthName="locationFullWidth" value={profile.locationUrl} enabled={profile.locationEnabled} fullWidth={profile.locationFullWidth} placeholder="https://maps.google.com/..." />
           <ButtonSetting label="Kişilere Ekle" enabledName="contactEnabled" fullWidthName="contactFullWidth" enabled={profile.contactEnabled} fullWidth={profile.contactFullWidth} />
+          <div className="rounded-2xl border border-slate-200 bg-slate-50 p-4">
+            <div className="flex flex-wrap items-center justify-between gap-3">
+              <p className="text-sm font-black text-slate-800">IBAN</p>
+              <CheckControl name="ibanEnabled" label="Göster" defaultChecked={profile.ibanEnabled} />
+            </div>
+            <input
+              name="iban"
+              type="text"
+              inputMode="text"
+              autoCapitalize="characters"
+              defaultValue={profile.iban ?? ""}
+              placeholder="TR00 0000 0000 0000 0000 0000 00"
+              className="field-input mt-3 uppercase"
+            />
+            <p className="mt-2 text-xs leading-5 text-slate-400">Profilde mobil uyumlu bir kopyalama kartı olarak gösterilir.</p>
+          </div>
         </div>
       </section>
 

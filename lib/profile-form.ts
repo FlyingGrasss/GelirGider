@@ -1,6 +1,8 @@
 import {
   normalizeEmail,
+  isValidIban,
   normalizeHttpUrl,
+  normalizeIban,
   normalizeSlug,
   type ProfileFacilityInput,
 } from "@/lib/profile";
@@ -12,8 +14,10 @@ export type ProfileFields = {
   imageUrl: string | null;
   showImage: boolean;
   name: string;
-  title: string;
+  title: string | null;
   title2: string | null;
+  iban: string | null;
+  ibanEnabled: boolean;
   callNumber: string | null;
   callEnabled: boolean;
   callFullWidth: boolean;
@@ -110,8 +114,10 @@ function parseFacilities(formData: FormData): ParseResult<ProfileFacilityInput[]
 export function parseProfileFields(formData: FormData): ParseResult<ProfileFields> {
   const slug = normalizeSlug(textValue(formData, "slug"));
   const name = textValue(formData, "name").slice(0, 120);
-  const title = textValue(formData, "title").slice(0, 120);
+  const title = textValue(formData, "title").slice(0, 120) || null;
   const title2 = textValue(formData, "title2").slice(0, 120) || null;
+  const ibanInput = textValue(formData, "iban");
+  const iban = normalizeIban(ibanInput);
   const facilitiesHeading =
     textValue(formData, "facilitiesHeading").slice(0, 80) || "Bağlantılar";
 
@@ -123,8 +129,8 @@ export function parseProfileFields(formData: FormData): ParseResult<ProfileField
     return { error: "İsim zorunludur." };
   }
 
-  if (!title) {
-    return { error: "Ana başlık zorunludur." };
+  if (ibanInput && (!iban || !isValidIban(iban))) {
+    return { error: "Geçerli bir IBAN girin." };
   }
 
   const image = optionalUrl(formData, "imageUrl", "Görsel");
@@ -154,6 +160,8 @@ export function parseProfileFields(formData: FormData): ParseResult<ProfileField
       name,
       title,
       title2,
+      iban,
+      ibanEnabled: checkboxValue(formData, "ibanEnabled"),
       callNumber: textValue(formData, "callNumber").slice(0, 40) || null,
       callEnabled: checkboxValue(formData, "callEnabled"),
       callFullWidth: checkboxValue(formData, "callFullWidth"),

@@ -37,8 +37,10 @@ model Profile {
   imageUrl               String?
   showImage              Boolean          @default(true)
   name                   String
-  title                  String
+  title                  String?
   title2                 String?
+  iban                   String?
+  ibanEnabled            Boolean          @default(true)
   callNumber             String?
   callEnabled            Boolean          @default(true)
   callFullWidth          Boolean          @default(false)

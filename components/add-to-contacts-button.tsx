@@ -13,7 +13,7 @@ export function AddToContactsButton({
   fullWidth,
 }: {
   name: string;
-  title: string;
+  title: string | null;
   title2: string | null;
   phone: string | null;
   email: string | null;
