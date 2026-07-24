@@ -73,7 +73,7 @@ export async function signInProfileAction(
   const password = formData.get("password");
 
   if (!slug || typeof password !== "string") {
-    return { error: "Slug ve şifre zorunludur." };
+    return { error: "Kısa adres ve şifre zorunludur." };
   }
 
   const profile = await prisma.profile.findUnique({ where: { slug } });
@@ -115,7 +115,7 @@ export async function updateOwnedProfileAction(
     console.error("[updateOwnedProfileAction] Profile update failed", error);
     return {
       error: isUniqueConstraintError(error)
-        ? "Ez a slug már használatban van."
+        ? "Bu kısa adres zaten kullanılıyor."
         : "Profil kaydedilemedi.",
     };
   }
@@ -168,7 +168,7 @@ export async function createProfileAction(
     console.error("[createProfileAction] Profile creation failed", error);
     return {
       error: isUniqueConstraintError(error)
-        ? "Bu slug zaten kullanılıyor."
+        ? "Bu kısa adres zaten kullanılıyor."
       : "Profil oluşturulamadı.",
     };
   }
@@ -224,7 +224,7 @@ export async function updateProfileAction(
     console.error("[updateProfileAction] Profile update failed", error);
     return {
       error: isUniqueConstraintError(error)
-        ? "Bu slug zaten kullanılıyor."
+        ? "Bu kısa adres zaten kullanılıyor."
         : "Profil kaydedilemedi.",
     };
   }

@@ -5,7 +5,7 @@ import { createProfileAction } from "@/app/profile-actions";
 import { requireSession } from "@/lib/auth-helpers";
 
 export const metadata: Metadata = {
-  title: "Yeni profil | Admin",
+  title: "Yeni profil | Yönetim",
 };
 
 export default async function NewProfilePage() {

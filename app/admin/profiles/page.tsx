@@ -5,7 +5,7 @@ import { requireSession } from "@/lib/auth-helpers";
 import { prisma } from "@/lib/db";
 
 export const metadata: Metadata = {
-  title: "Profil kartları | Admin",
+  title: "Profil kartları | Yönetim",
 };
 
 export default async function ProfilesPage() {
@@ -20,7 +20,7 @@ export default async function ProfilesPage() {
       <div className="mx-auto max-w-6xl">
         <header className="mb-8 flex flex-wrap items-end justify-between gap-4">
           <div>
-            <p className="eyebrow">Admin</p>
+              <p className="eyebrow">Yönetim</p>
             <h1 className="mt-2 text-3xl font-black tracking-tight text-slate-950">Profil kartları</h1>
             <p className="mt-2 text-sm text-slate-500">Kişisel link kartlarını buradan oluştur ve yönet.</p>
           </div>
@@ -51,8 +51,8 @@ export default async function ProfilesPage() {
                 </div>
                 <div className="mt-6 flex flex-wrap gap-3">
                   <Link href={`/admin/profiles/${profile.id}`} className="rounded-xl bg-slate-900 px-4 py-2.5 text-sm font-bold text-white transition hover:bg-slate-700">Düzenle</Link>
-                  <Link href={`/${profile.slug}`} target="_blank" rel="noreferrer" className="rounded-xl border border-slate-200 px-4 py-2.5 text-sm font-bold text-slate-600 transition hover:bg-slate-50">Public sayfa ↗</Link>
-                  <Link href={`/${profile.slug}/admin`} target="_blank" rel="noreferrer" className="rounded-xl border border-slate-200 px-4 py-2.5 text-sm font-bold text-slate-600 transition hover:bg-slate-50">Owner admin ↗</Link>
+                  <Link href={`/${profile.slug}`} target="_blank" rel="noreferrer" className="rounded-xl border border-slate-200 px-4 py-2.5 text-sm font-bold text-slate-600 transition hover:bg-slate-50">Herkese açık sayfa ↗</Link>
+                  <Link href={`/${profile.slug}/admin`} target="_blank" rel="noreferrer" className="rounded-xl border border-slate-200 px-4 py-2.5 text-sm font-bold text-slate-600 transition hover:bg-slate-50">Profil yönetimi ↗</Link>
                 </div>
               </article>
             ))}

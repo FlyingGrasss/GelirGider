@@ -190,7 +190,7 @@ export function ProfileEditorForm({
         </div>
         <div className="grid gap-4 sm:grid-cols-2">
           <div>
-            <label htmlFor="profile-slug" className="field-label">Slug</label>
+            <label htmlFor="profile-slug" className="field-label">Kısa adres</label>
             {mode === "owner-edit" ? <input type="hidden" name="slug" value={profile.slug} /> : null}
             <input
               id="profile-slug"

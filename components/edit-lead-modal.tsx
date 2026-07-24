@@ -29,7 +29,7 @@ export function EditLeadModal({ lead }: { lead: EditableLead }) {
           <div className="modal-card max-w-lg" role="dialog" aria-modal="true" aria-labelledby={`lead-edit-title-${lead.id}`}>
             <div className="mb-6 flex items-start justify-between gap-4">
               <div>
-                <p className="eyebrow">Lead düzenle</p>
+                <p className="eyebrow">Takibi düzenle</p>
                 <h2 id={`lead-edit-title-${lead.id}`} className="mt-1 text-2xl font-black text-slate-950">{lead.personName}</h2>
               </div>
               <button type="button" aria-label="Pencereyi kapat" onClick={() => setOpen(false)} className="rounded-xl px-3 py-1 text-2xl leading-none text-slate-300 transition hover:bg-slate-100 hover:text-slate-700">×</button>

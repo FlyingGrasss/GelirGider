@@ -94,7 +94,7 @@ export default async function AdminPage() {
           <div className="flex items-center gap-3">
             <div className="brand-mark">₺</div>
             <div>
-              <p className="text-sm font-bold tracking-tight text-slate-950">Admin</p>
+              <p className="text-sm font-bold tracking-tight text-slate-950">Yönetim</p>
               <p className="text-xs text-slate-400">Gelir Gider ve profiller</p>
             </div>
           </div>

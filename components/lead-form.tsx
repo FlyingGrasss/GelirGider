@@ -79,7 +79,7 @@ export function LeadForm({
       <div className="flex gap-3">
         {onCancel ? <button type="button" onClick={onCancel} className="flex-1 rounded-2xl border border-slate-200 px-5 py-3.5 text-sm font-bold text-slate-500 transition hover:bg-slate-50">Vazgeç</button> : null}
         <button type="submit" disabled={pending} className="flex-1 rounded-2xl bg-slate-900 px-5 py-3.5 text-sm font-bold text-white transition hover:bg-slate-700 disabled:opacity-60">
-          {pending ? "Kaydediliyor…" : lead ? "Değişiklikleri kaydet" : "Lead ekle"}
+          {pending ? "Kaydediliyor…" : lead ? "Değişiklikleri kaydet" : "Takip ekle"}
         </button>
       </div>
     </form>

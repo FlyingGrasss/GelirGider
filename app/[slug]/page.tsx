@@ -94,6 +94,7 @@ export default async function ProfilePage({ params }: ProfilePageProps) {
     <main className="profile-page">
       <div className="profile-shell">
         <header className="profile-header">
+          <p className="profile-kicker">Dijital Kartvizit</p>
           {profile.showImage && profile.imageUrl ? (
             // eslint-disable-next-line @next/next/no-img-element
             <img src={profile.imageUrl} alt="" className="profile-image" />

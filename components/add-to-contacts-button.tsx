@@ -35,7 +35,11 @@ export function AddToContactsButton({
     const downloadUrl = URL.createObjectURL(blob);
     const link = document.createElement("a");
     link.href = downloadUrl;
-    link.download = `${name.replace(/[^a-z0-9]+/gi, "-").toLowerCase() || "kontakt"}.vcf`;
+    const safeFileName = name
+      .trim()
+      .replace(/[<>:"/\\|?*\u0000-\u001F]/g, "")
+      .replace(/\.+$/, "") || "Kişi";
+    link.download = `${safeFileName}.vcf`;
     link.click();
     URL.revokeObjectURL(downloadUrl);
   }

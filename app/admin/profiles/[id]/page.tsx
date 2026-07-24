@@ -14,7 +14,7 @@ type EditProfilePageProps = {
 export async function generateMetadata({ params }: EditProfilePageProps): Promise<Metadata> {
   const { id } = await params;
   const profile = await prisma.profile.findUnique({ where: { id }, select: { name: true } });
-  return { title: profile ? `${profile.name} düzenle | Admin` : "Profil düzenle | Admin" };
+  return { title: profile ? `${profile.name} düzenle | Yönetim` : "Profil düzenle | Yönetim" };
 }
 
 export default async function EditProfilePage({ params }: EditProfilePageProps) {
@@ -38,7 +38,7 @@ export default async function EditProfilePage({ params }: EditProfilePageProps) 
             <p className="eyebrow">Profil kartları</p>
             <h1 className="mt-2 text-3xl font-black tracking-tight text-slate-950">{profile.name} düzenle</h1>
           </div>
-          <Link href={`/${profile.slug}`} target="_blank" rel="noreferrer" className="rounded-xl border border-slate-200 px-4 py-2.5 text-sm font-bold text-slate-600 transition hover:bg-white">Public sayfa ↗</Link>
+          <Link href={`/${profile.slug}`} target="_blank" rel="noreferrer" className="rounded-xl border border-slate-200 px-4 py-2.5 text-sm font-bold text-slate-600 transition hover:bg-white">Herkese açık sayfa ↗</Link>
         </header>
         <section className="panel">
           <ProfileEditorForm action={updateProfileAction} mode="master-edit" profile={profile} />

@@ -8,7 +8,7 @@ import { requireSession } from "@/lib/auth-helpers";
 import { prisma } from "@/lib/db";
 
 export const metadata: Metadata = {
-  title: "Leads | Admin",
+  title: "Takipler | Yönetim",
 };
 
 const dateFormatter = new Intl.DateTimeFormat("tr-TR", {
@@ -38,8 +38,8 @@ export default async function LeadsPage() {
       <div className="mx-auto max-w-6xl">
         <header className="mb-8">
           <p className="eyebrow">Takip listesi</p>
-          <h1 className="mt-2 text-3xl font-black tracking-tight text-slate-950">Leads</h1>
-          <p className="mt-2 text-sm text-slate-500">Mesaj, arama, mail ve siparişleri takip et.</p>
+          <h1 className="mt-2 text-3xl font-black tracking-tight text-slate-950">Takipler</h1>
+          <p className="mt-2 text-sm text-slate-500">Mesaj, arama, mail ve siparişleri tek yerde takip et.</p>
         </header>
 
         <AdminNav active="leads" />
@@ -48,7 +48,7 @@ export default async function LeadsPage() {
           <section className="panel h-fit">
             <div className="mb-6">
               <p className="eyebrow">Takip listesi</p>
-              <h2 className="mt-1 text-xl font-black tracking-tight text-slate-950">Yeni lead</h2>
+              <h2 className="mt-1 text-xl font-black tracking-tight text-slate-950">Yeni takip</h2>
               <p className="mt-2 text-sm leading-6 text-slate-500">Bir kişiyi, iletişim bilgisini, takip tarihini ve notlarını kaydet.</p>
             </div>
             <LeadForm action={addLeadAction} />
@@ -58,12 +58,12 @@ export default async function LeadsPage() {
             <div className="mb-5 flex items-end justify-between gap-4">
               <div>
                 <p className="eyebrow">Takip listesi</p>
-                <h2 className="mt-1 text-xl font-black tracking-tight text-slate-950">Kayıtlı leadler</h2>
+                <h2 className="mt-1 text-xl font-black tracking-tight text-slate-950">Kayıtlı takipler</h2>
               </div>
               <span className="text-xs font-medium text-slate-400">En yeni 100</span>
             </div>
             {leads.length === 0 ? (
-              <div className="empty-state"><p className="font-bold text-slate-700">Henüz lead yok</p><p className="mt-1 text-sm text-slate-400">Soldaki formdan ilk takibini ekleyebilirsin.</p></div>
+              <div className="empty-state"><p className="font-bold text-slate-700">Henüz takip yok</p><p className="mt-1 text-sm text-slate-400">Soldaki formdan ilk takibini ekleyebilirsin.</p></div>
             ) : (
               <ul className="divide-y divide-slate-100">
                 {leads.map((lead) => (

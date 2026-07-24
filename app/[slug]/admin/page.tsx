@@ -53,7 +53,7 @@ export default async function ProfileAdminPage({ params }: ProfileAdminPageProps
             <p className="eyebrow">Profil yönetimi</p>
             <h1 className="mt-1 text-3xl font-black tracking-tight text-slate-950">{profile.name}</h1>
             <Link href={`/${profile.slug}`} target="_blank" rel="noreferrer" className="mt-2 inline-block text-sm font-semibold text-emerald-700 hover:underline">
-              Public profili aç ↗
+              Herkese açık profili aç ↗
             </Link>
           </div>
           <form action={signOutProfileAction}>

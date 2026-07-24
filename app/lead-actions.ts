@@ -20,7 +20,7 @@ function parseLeadFields(formData: FormData) {
   const details = formData.get("details");
 
   if (typeof type !== "string" || !leadTypes.includes(type as (typeof leadTypes)[number])) {
-    return { error: "Lead türünü seçin." } as const;
+    return { error: "Takip türünü seçin." } as const;
   }
 
   if (typeof personName !== "string" || !personName.trim()) {
@@ -77,7 +77,7 @@ export async function addLeadAction(
   });
 
   revalidatePath("/admin");
-  return { success: "Lead eklendi." };
+  return { success: "Takip eklendi." };
 }
 
 export async function updateLeadAction(
@@ -89,7 +89,7 @@ export async function updateLeadAction(
   const parsed = parseLeadFields(formData);
 
   if (typeof id !== "string" || !id) {
-    return { error: "Lead bulunamadı." };
+    return { error: "Takip bulunamadı." };
   }
 
   if ("error" in parsed) {
@@ -102,7 +102,7 @@ export async function updateLeadAction(
   });
 
   if (!existingLead) {
-    return { error: "Lead bulunamadı." };
+    return { error: "Takip bulunamadı." };
   }
 
   await prisma.lead.update({

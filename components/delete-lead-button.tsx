@@ -14,12 +14,12 @@ export function DeleteLeadButton({ id, personName }: { id: string; personName: s
           <div className="modal-card max-w-md" role="dialog" aria-modal="true" aria-labelledby={`lead-delete-title-${id}`}>
             <div className="mb-5 flex items-start justify-between gap-4">
               <div>
-                <p className="eyebrow text-rose-600">Lead sil</p>
+                <p className="eyebrow text-rose-600">Takibi sil</p>
                 <h2 id={`lead-delete-title-${id}`} className="mt-1 text-xl font-black text-slate-950">Emin misiniz?</h2>
               </div>
               <button type="button" aria-label="Pencereyi kapat" onClick={() => setOpen(false)} className="rounded-xl px-3 py-1 text-2xl leading-none text-slate-300 transition hover:bg-slate-100 hover:text-slate-700">×</button>
             </div>
-            <p className="text-sm leading-6 text-slate-500"><span className="font-bold text-slate-800">{personName}</span> lead kaydı silinecek.</p>
+            <p className="text-sm leading-6 text-slate-500"><span className="font-bold text-slate-800">{personName}</span> takip kaydı silinecek.</p>
             <form action={deleteLeadAction} className="mt-7 flex gap-3">
               <input type="hidden" name="id" value={id} />
               <button type="button" onClick={() => setOpen(false)} className="flex-1 rounded-2xl border border-slate-200 px-5 py-3.5 text-sm font-bold text-slate-500 transition hover:bg-slate-50">Vazgeç</button>
