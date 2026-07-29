@@ -37,6 +37,7 @@ This project uses **pnpm** exclusively. Never use `npm` or `yarn`.
 - Keep verification lightweight and proportional to the change.
 - Do not run `pnpm build` for routine checks unless explicitly requested or the change genuinely needs a production build.
 - For syntax and TypeScript checks, prefer `pnpm exec tsc --noEmit`.
+- Run `pnpm exec tsc --noEmit` only after larger changes spanning many files or lines; skip it for small, isolated UI or copy fixes.
 - Avoid running multiple redundant verification commands when one targeted verification command is enough.
 - Do not use the in-app Browser or browser automation for routine local UI verification. The user will manually test visual/UI behavior unless they explicitly ask for browser-based verification.
 

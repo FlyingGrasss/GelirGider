@@ -35,11 +35,6 @@ export const metadata: Metadata = {
     description: "NFC kartvizit, dijital kartvizit ve temassız iletişim çözümleri.",
     images: [absoluteUrl("/icon.png")],
   },
-  icons: {
-    icon: [{ url: "/icon.png", type: "image/png" }, { url: "/favicon.ico" }],
-    shortcut: ["/favicon.ico"],
-    apple: [{ url: "/icon.png", type: "image/png" }],
-  },
 };
 
 export default function RootLayout({

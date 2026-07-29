@@ -42,9 +42,8 @@ export function ProductFlipCard({
     }
 
     const nextRotation = dragStart.current.rotation + (event.clientX - dragStart.current.x) * 0.4;
-    const boundedRotation = Math.max(-180, Math.min(360, nextRotation));
-    const normalizedRotation = ((boundedRotation % 360) + 360) % 360;
-    setRotation(boundedRotation);
+    const normalizedRotation = ((nextRotation % 360) + 360) % 360;
+    setRotation(nextRotation);
     setFlipped(normalizedRotation > 90 && normalizedRotation < 270);
   }
 
@@ -80,7 +79,7 @@ export function ProductFlipCard({
         onPointerMove={handlePointerMove}
         onPointerUp={finishPointerGesture}
         onPointerCancel={finishPointerGesture}
-        className={`relative block aspect-[660/1050] w-full select-none overflow-hidden rounded-[2rem] border-0 bg-transparent text-left [perspective:1200px] touch-pan-y focus-visible:ring-2 focus-visible:ring-[#a5efbd]/50 ${dragging ? "cursor-grabbing" : "cursor-grab"}`}
+        className={`relative block aspect-[660/1050] w-full select-none text-left [perspective:1200px] touch-pan-y focus-visible:ring-2 focus-visible:ring-[#a5efbd]/50 ${dragging ? "cursor-grabbing" : "cursor-grab"}`}
       >
         <span
           className={`absolute inset-0 [transform-style:preserve-3d] ${dragging ? "transition-none" : "transition-transform duration-[1400ms] ease-[cubic-bezier(0.22,1,0.36,1)]"}`}
