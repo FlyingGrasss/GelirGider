@@ -3,6 +3,7 @@ import Link from "next/link";
 import { AdminNav } from "@/components/admin-nav";
 import { requireSession } from "@/lib/auth-helpers";
 import { prisma } from "@/lib/db";
+import { emptyStateClass, eyebrowClass, panelClass } from "@/lib/ui";
 
 export const metadata: Metadata = {
   title: "Profil kartları | Yönetim",
@@ -16,11 +17,11 @@ export default async function ProfilesPage() {
   });
 
   return (
-    <main className="admin-page min-h-screen px-4 py-5 sm:px-6 sm:py-8">
+    <main className="min-h-screen bg-[#f4f7f5] px-4 py-5 sm:px-6 sm:py-8">
       <div className="mx-auto max-w-6xl">
         <header className="mb-8 flex flex-wrap items-end justify-between gap-4">
           <div>
-              <p className="eyebrow">Yönetim</p>
+              <p className={eyebrowClass}>Yönetim</p>
             <h1 className="mt-2 text-3xl font-black tracking-tight text-slate-950">Profil kartları</h1>
             <p className="mt-2 text-sm text-slate-500">Kişisel link kartlarını buradan oluştur ve yönet.</p>
           </div>
@@ -30,8 +31,8 @@ export default async function ProfilesPage() {
         <AdminNav active="profiles" />
 
         {profiles.length === 0 ? (
-          <section className="panel mt-6">
-            <div className="empty-state">
+          <section className={`${panelClass} mt-6`}>
+            <div className={emptyStateClass}>
               <p className="font-bold text-slate-700">Henüz profil kartı yok</p>
               <p className="mt-1 text-sm text-slate-400">İlk kartı oluşturarak /slug adresini yayınlayabilirsin.</p>
             </div>
@@ -39,10 +40,10 @@ export default async function ProfilesPage() {
         ) : (
           <section className="mt-6 grid gap-4 md:grid-cols-2">
             {profiles.map((profile) => (
-              <article key={profile.id} className="panel">
+              <article key={profile.id} className={panelClass}>
                 <div className="flex items-start justify-between gap-4">
                   <div>
-                    <p className="eyebrow tracking-normal">/{profile.slug.toLowerCase()}</p>
+                    <p className={`${eyebrowClass} tracking-normal`}>/{profile.slug.toLowerCase()}</p>
                     <h2 className="mt-1 text-xl font-black text-slate-950">{profile.name}</h2>
                     {profile.title ? <p className="mt-1 text-sm text-slate-500">{profile.title}</p> : null}
                     <p className="mt-3 text-xs text-slate-400">{profile._count.facilities} bağlantı</p>

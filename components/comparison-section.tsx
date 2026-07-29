@@ -6,6 +6,8 @@ type ComparisonRow = {
   settlementCents: number;
 };
 
+import { emptyStateClass, eyebrowClass, panelClass } from "@/lib/ui";
+
 const currency = new Intl.NumberFormat("tr-TR", {
   style: "currency",
   currency: "TRY",
@@ -25,9 +27,9 @@ export function ComparisonSection({
   totalReceivedCents: number;
 }) {
   return (
-    <section className="panel mt-6">
+    <section className={`${panelClass} mt-6`}>
       <div className="mb-5">
-        <p className="eyebrow">Karşılaştırma</p>
+        <p className={eyebrowClass}>Karşılaştırma</p>
         <h2 className="mt-1 text-xl font-black tracking-tight text-slate-950">Kim ne kadar aldı, kim ne kadar harcadı?</h2>
         <p className="mt-2 text-sm leading-6 text-slate-500">
           “Bölüşüldü” kayıtları üyeler arasında eşit paylaştırılır. Eşitlik hesabı, alınan para eksi harcanan para üzerinden yapılır.
@@ -35,7 +37,7 @@ export function ComparisonSection({
       </div>
 
       {rows.length === 0 ? (
-        <div className="empty-state min-h-0 px-4 py-10">
+        <div className={`${emptyStateClass} min-h-0 px-4 py-10`}>
           <p className="font-bold text-slate-700">Karşılaştırılacak kayıt yok</p>
           <p className="mt-1 text-sm text-slate-400">İlk gelir veya gider kaydını eklediğinde burada görünecek.</p>
         </div>

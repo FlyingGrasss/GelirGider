@@ -6,6 +6,7 @@ import {
   PayerPicker,
   type MemberOption,
 } from "@/components/payer-picker";
+import { fieldInputClass, fieldLabelClass } from "@/lib/ui";
 
 export type EditableTransaction = {
   id: string;
@@ -47,7 +48,7 @@ export function EditTransactionForm({
       />
 
       <div>
-        <span className="field-label">Tür</span>
+        <span className={fieldLabelClass}>Tür</span>
         <div className="grid grid-cols-2 gap-3">
           <button
             type="button"
@@ -79,7 +80,7 @@ export function EditTransactionForm({
       </div>
 
       <div>
-        <span className="field-label">
+        <span className={fieldLabelClass}>
           {type === "INCOME" ? "Geliri kim aldı?" : "Gideri kim ödedi?"}
         </span>
         <PayerPicker
@@ -91,7 +92,7 @@ export function EditTransactionForm({
       </div>
 
       <div>
-        <label htmlFor={`edit-amount-${transaction.id}`} className="field-label">
+        <label htmlFor={`edit-amount-${transaction.id}`} className={fieldLabelClass}>
           Tutar
         </label>
         <div className="relative">
@@ -102,7 +103,7 @@ export function EditTransactionForm({
             inputMode="decimal"
             required
             defaultValue={(transaction.amountCents / 100).toFixed(2).replace(".", ",")}
-            className="field-input pr-12"
+            className={`${fieldInputClass} pr-12`}
           />
           <span className="pointer-events-none absolute inset-y-0 right-4 flex items-center text-sm font-semibold text-slate-400">
             ₺
@@ -111,7 +112,7 @@ export function EditTransactionForm({
       </div>
 
       <div>
-        <label htmlFor={`edit-description-${transaction.id}`} className="field-label">
+        <label htmlFor={`edit-description-${transaction.id}`} className={fieldLabelClass}>
           Açıklama
         </label>
         <input
@@ -120,12 +121,12 @@ export function EditTransactionForm({
           type="text"
           maxLength={120}
           defaultValue={transaction.description}
-          className="field-input"
+          className={fieldInputClass}
         />
       </div>
 
       <div>
-        <label htmlFor={`edit-date-${transaction.id}`} className="field-label">
+        <label htmlFor={`edit-date-${transaction.id}`} className={fieldLabelClass}>
           Tarih
         </label>
         <input
@@ -134,7 +135,7 @@ export function EditTransactionForm({
           type="date"
           required
           defaultValue={transaction.date}
-          className="field-input"
+          className={fieldInputClass}
         />
       </div>
 

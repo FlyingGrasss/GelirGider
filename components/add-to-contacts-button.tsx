@@ -11,6 +11,7 @@ export function AddToContactsButton({
   email,
   url,
   fullWidth,
+  theme,
 }: {
   name: string;
   title: string | null;
@@ -19,6 +20,7 @@ export function AddToContactsButton({
   email: string | null;
   url: string;
   fullWidth: boolean;
+  theme: { surface: string; wideSurface: string; border: string };
 }) {
   function downloadContact() {
     const lines = [
@@ -45,8 +47,13 @@ export function AddToContactsButton({
   }
 
   return (
-    <button type="button" onClick={downloadContact} className={`profile-button ${fullWidth ? "profile-button-wide" : "profile-button-normal"}`}>
-      <span className="profile-button-icon"><FaAddressBook /></span>
+    <button
+      type="button"
+      onClick={downloadContact}
+      className={`flex min-h-24 items-center justify-center gap-3 rounded-2xl border px-4 text-base font-medium text-slate-50 shadow-[inset_0_1px_0_rgb(255_255_255_/_0.2),0_14px_30px_rgb(0_0_0_/_0.16)] transition hover:-translate-y-0.5 hover:brightness-110 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-emerald-300 sm:text-lg ${fullWidth ? "col-span-2" : ""}`}
+      style={{ background: fullWidth ? theme.wideSurface : theme.surface, borderColor: theme.border }}
+    >
+      <span className="grid min-h-10 min-w-12 place-items-center border-r border-white/25 pr-4 text-2xl" aria-hidden="true"><FaAddressBook /></span>
       <span>Kişilere Ekle</span>
     </button>
   );

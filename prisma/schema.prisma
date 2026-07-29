@@ -39,6 +39,7 @@ model Profile {
   name                   String
   title                  String?
   title2                 String?
+  colorScheme            String           @default("forest")
   iban                   String?
   ibanEnabled            Boolean          @default(true)
   callNumber             String?
@@ -179,4 +180,15 @@ model Lead {
   user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@index([userId, followUpAt])
+}
+
+model ContactMessage {
+  id        String    @id @default(cuid())
+  name      String
+  contact   String
+  message   String
+  createdAt DateTime  @default(now())
+  readAt    DateTime?
+
+  @@index([createdAt])
 }

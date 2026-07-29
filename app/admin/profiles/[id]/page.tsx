@@ -6,6 +6,8 @@ import { ProfileEditorForm } from "@/components/profile-editor-form";
 import { updateProfileAction } from "@/app/profile-actions";
 import { requireSession } from "@/lib/auth-helpers";
 import { prisma } from "@/lib/db";
+import { normalizeProfileColorScheme } from "@/lib/profile";
+import { eyebrowClass, panelClass } from "@/lib/ui";
 
 type EditProfilePageProps = {
   params: Promise<{ id: string }>;
@@ -30,18 +32,22 @@ export default async function EditProfilePage({ params }: EditProfilePageProps) 
   }
 
   return (
-    <main className="admin-page min-h-screen px-4 py-5 sm:px-6 sm:py-8">
+    <main className="min-h-screen bg-[#f4f7f5] px-4 py-5 sm:px-6 sm:py-8">
       <div className="mx-auto max-w-4xl">
         <AdminNav active="profiles" />
         <header className="my-8 flex flex-wrap items-end justify-between gap-4">
           <div>
-            <p className="eyebrow">Profil kartları</p>
+            <p className={eyebrowClass}>Profil kartları</p>
             <h1 className="mt-2 text-3xl font-black tracking-tight text-slate-950">{profile.name} düzenle</h1>
           </div>
           <Link href={`/${profile.slug}`} target="_blank" rel="noreferrer" className="rounded-xl border border-slate-200 px-4 py-2.5 text-sm font-bold text-slate-600 transition hover:bg-white">Herkese açık sayfa ↗</Link>
         </header>
-        <section className="panel">
-          <ProfileEditorForm action={updateProfileAction} mode="master-edit" profile={profile} />
+        <section className={panelClass}>
+          <ProfileEditorForm
+            action={updateProfileAction}
+            mode="master-edit"
+            profile={{ ...profile, colorScheme: normalizeProfileColorScheme(profile.colorScheme) }}
+          />
         </section>
       </div>
     </main>

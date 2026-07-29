@@ -2,6 +2,7 @@
 
 import { useActionState, useState } from "react";
 import type { LeadFormState } from "@/app/lead-actions";
+import { fieldInputClass, fieldLabelClass } from "@/lib/ui";
 
 type LeadType = "MESSAGE" | "CALL" | "MAIL" | "ORDER";
 
@@ -43,7 +44,7 @@ export function LeadForm({
       {lead ? <input type="hidden" name="id" value={lead.id} /> : null}
       <input type="hidden" name="leadType" value={type} />
       <div>
-        <span className="field-label">Tür</span>
+        <span className={fieldLabelClass}>Tür</span>
         <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
           {options.map((option) => (
             <button
@@ -59,20 +60,20 @@ export function LeadForm({
         </div>
       </div>
       <div>
-        <label htmlFor={`${lead?.id ?? "new"}-personName`} className="field-label">Kişi</label>
-        <input id={`${lead?.id ?? "new"}-personName`} name="personName" required defaultValue={lead?.personName ?? ""} placeholder="Ahmet H. Yazıcı" className="field-input" />
+        <label htmlFor={`${lead?.id ?? "new"}-personName`} className={fieldLabelClass}>Kişi</label>
+        <input id={`${lead?.id ?? "new"}-personName`} name="personName" required defaultValue={lead?.personName ?? ""} placeholder="Ahmet H. Yazıcı" className={fieldInputClass} />
       </div>
       <div>
-        <label htmlFor={`${lead?.id ?? "new"}-contactInfo`} className="field-label">İletişim bilgisi</label>
-        <input id={`${lead?.id ?? "new"}-contactInfo`} name="contactInfo" defaultValue={lead?.contactInfo ?? ""} placeholder="Telefon, e-posta veya başka bir bilgi" className="field-input" />
+        <label htmlFor={`${lead?.id ?? "new"}-contactInfo`} className={fieldLabelClass}>İletişim bilgisi</label>
+        <input id={`${lead?.id ?? "new"}-contactInfo`} name="contactInfo" defaultValue={lead?.contactInfo ?? ""} placeholder="Telefon, e-posta veya başka bir bilgi" className={fieldInputClass} />
       </div>
       <div>
-        <label htmlFor={`${lead?.id ?? "new"}-followUpAt`} className="field-label">Takip / teslim tarihi</label>
-        <input id={`${lead?.id ?? "new"}-followUpAt`} name="followUpAt" type="date" defaultValue={lead?.followUpAt ?? ""} className="field-input" />
+        <label htmlFor={`${lead?.id ?? "new"}-followUpAt`} className={fieldLabelClass}>Takip / teslim tarihi</label>
+        <input id={`${lead?.id ?? "new"}-followUpAt`} name="followUpAt" type="date" defaultValue={lead?.followUpAt ?? ""} className={fieldInputClass} />
       </div>
       <div>
-        <label htmlFor={`${lead?.id ?? "new"}-details`} className="field-label">Detaylar</label>
-        <textarea id={`${lead?.id ?? "new"}-details`} name="details" defaultValue={lead?.details ?? ""} rows={4} placeholder="Notlar, istekler, teslim detayları..." className="field-input h-auto py-3" />
+        <label htmlFor={`${lead?.id ?? "new"}-details`} className={fieldLabelClass}>Detaylar</label>
+        <textarea id={`${lead?.id ?? "new"}-details`} name="details" defaultValue={lead?.details ?? ""} rows={4} placeholder="Notlar, istekler, teslim detayları..." className={`${fieldInputClass} h-auto py-3`} />
       </div>
       {state.error ? <p role="alert" className="text-sm font-semibold text-rose-600">{state.error}</p> : null}
       {state.success ? <p role="status" className="text-sm font-semibold text-emerald-700">{state.success}</p> : null}

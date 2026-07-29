@@ -2,14 +2,14 @@ import Link from "next/link";
 
 export function AdminNav({ active }: { active: "overview" | "leads" | "profiles" }) {
   return (
-    <nav className="admin-nav" aria-label="Yönetim bölümleri">
-      <Link href="/admin" className={active === "overview" ? "admin-nav-active" : ""}>
+    <nav className="flex gap-1.5 overflow-x-auto border-b border-slate-200" aria-label="Yönetim bölümleri">
+      <Link href="/admin" className={`border-b-2 px-4 py-3 text-xs font-extrabold whitespace-nowrap transition ${active === "overview" ? "border-emerald-600 text-emerald-700" : "border-transparent text-slate-400 hover:bg-white/60 hover:text-slate-700"}`}>
         Gelir Gider
       </Link>
-      <Link href="/admin/profiles" className={active === "profiles" ? "admin-nav-active" : ""}>
+      <Link href="/admin/profiles" className={`border-b-2 px-4 py-3 text-xs font-extrabold whitespace-nowrap transition ${active === "profiles" ? "border-emerald-600 text-emerald-700" : "border-transparent text-slate-400 hover:bg-white/60 hover:text-slate-700"}`}>
         Profil kartları
       </Link>
-      <Link href="/admin/leads" className={active === "leads" ? "admin-nav-active" : ""}>
+      <Link href="/admin/leads" className={`border-b-2 px-4 py-3 text-xs font-extrabold whitespace-nowrap transition ${active === "leads" ? "border-emerald-600 text-emerald-700" : "border-transparent text-slate-400 hover:bg-white/60 hover:text-slate-700"}`}>
         Takipler
       </Link>
     </nav>

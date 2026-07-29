@@ -6,6 +6,7 @@ import {
   PayerPicker,
   type MemberOption,
 } from "@/components/payer-picker";
+import { fieldInputClass, fieldLabelClass } from "@/lib/ui";
 
 type TransactionType = "INCOME" | "EXPENSE";
 
@@ -39,7 +40,7 @@ export function TransactionForm({
       />
 
       <div>
-        <span className="field-label">Tür</span>
+        <span className={fieldLabelClass}>Tür</span>
         <div className="grid grid-cols-2 gap-3">
           <button
             type="button"
@@ -71,7 +72,7 @@ export function TransactionForm({
       </div>
 
       <div>
-        <span className="field-label">
+        <span className={fieldLabelClass}>
           {type === "INCOME" ? "Geliri kim aldı?" : "Gideri kim ödedi?"}
         </span>
         <PayerPicker
@@ -83,7 +84,7 @@ export function TransactionForm({
       </div>
 
       <div>
-        <label htmlFor="amount" className="field-label">
+        <label htmlFor="amount" className={fieldLabelClass}>
           Tutar
         </label>
         <div className="relative">
@@ -94,7 +95,7 @@ export function TransactionForm({
             inputMode="decimal"
             required
             placeholder="0,00"
-            className="field-input pr-12"
+            className={`${fieldInputClass} pr-12`}
           />
           <span className="pointer-events-none absolute inset-y-0 right-4 flex items-center text-sm font-semibold text-slate-400">
             ₺
@@ -103,7 +104,7 @@ export function TransactionForm({
       </div>
 
       <div>
-        <label htmlFor="description" className="field-label">
+        <label htmlFor="description" className={fieldLabelClass}>
           Açıklama
         </label>
         <input
@@ -112,15 +113,15 @@ export function TransactionForm({
           type="text"
           maxLength={120}
           placeholder="Örn. market alışverişi"
-          className="field-input"
+          className={fieldInputClass}
         />
       </div>
 
       <div>
-        <label htmlFor="date" className="field-label">
+        <label htmlFor="date" className={fieldLabelClass}>
           Tarih
         </label>
-        <input id="date" name="date" type="date" required className="field-input" />
+        <input id="date" name="date" type="date" required className={fieldInputClass} />
       </div>
 
       {state.error ? (

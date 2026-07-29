@@ -18,10 +18,10 @@ export default async function SignInPage() {
   }
 
   return (
-    <main className="auth-page">
-      <div className="auth-card">
+    <main className="flex min-h-screen items-center justify-center bg-[radial-gradient(circle_at_top_left,#dcefe2_0,transparent_35%),#f4f7f5] p-5">
+      <div className="w-full max-w-md rounded-[2rem] border border-slate-200/75 bg-white/90 p-8 shadow-[0_24px_70px_rgb(25_55_36_/_0.1)] backdrop-blur-xl">
         <div className="mb-7 flex items-center gap-3">
-          <div className="brand-mark">₺</div>
+          <div className="grid h-10 w-10 place-items-center rounded-2xl bg-emerald-100 text-lg font-black text-emerald-700">₺</div>
           <div>
             <p className="text-sm font-bold tracking-tight text-slate-900">Gelir Gider</p>
             <p className="text-xs text-slate-400">İki kişi, tek düzen</p>

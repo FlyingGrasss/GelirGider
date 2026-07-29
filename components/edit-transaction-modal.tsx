@@ -6,6 +6,7 @@ import {
   type EditableTransaction,
 } from "@/components/edit-transaction-form";
 import type { MemberOption } from "@/components/payer-picker";
+import { eyebrowClass, modalBackdropClass, modalCardClass } from "@/lib/ui";
 
 export function EditTransactionModal({
   transaction,
@@ -49,7 +50,7 @@ export function EditTransactionModal({
 
       {open ? (
         <div
-          className="modal-backdrop"
+          className={modalBackdropClass}
           role="presentation"
           onMouseDown={(event) => {
             if (event.target === event.currentTarget) {
@@ -58,14 +59,14 @@ export function EditTransactionModal({
           }}
         >
           <div
-            className="modal-card max-w-lg"
+            className={`${modalCardClass} max-w-lg`}
             role="dialog"
             aria-modal="true"
             aria-labelledby={`edit-title-${transaction.id}`}
           >
             <div className="mb-7 flex items-start justify-between gap-4">
               <div>
-                <p className="eyebrow">Kayıt düzenle</p>
+                <p className={eyebrowClass}>Kayıt düzenle</p>
                 <h2
                   id={`edit-title-${transaction.id}`}
                   className="mt-1 text-2xl font-black tracking-tight text-slate-950"

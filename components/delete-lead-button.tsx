@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { deleteLeadAction } from "@/app/lead-actions";
+import { eyebrowClass, modalBackdropClass, modalCardClass } from "@/lib/ui";
 
 export function DeleteLeadButton({ id, personName }: { id: string; personName: string }) {
   const [open, setOpen] = useState(false);
@@ -10,11 +11,11 @@ export function DeleteLeadButton({ id, personName }: { id: string; personName: s
     <>
       <button type="button" onClick={() => setOpen(true)} className="rounded-lg px-2 py-2 text-xs font-bold text-slate-300 transition hover:bg-rose-50 hover:text-rose-500">Sil</button>
       {open ? (
-        <div className="modal-backdrop" role="presentation" onMouseDown={(event) => { if (event.target === event.currentTarget) setOpen(false); }}>
-          <div className="modal-card max-w-md" role="dialog" aria-modal="true" aria-labelledby={`lead-delete-title-${id}`}>
+        <div className={modalBackdropClass} role="presentation" onMouseDown={(event) => { if (event.target === event.currentTarget) setOpen(false); }}>
+          <div className={`${modalCardClass} max-w-md`} role="dialog" aria-modal="true" aria-labelledby={`lead-delete-title-${id}`}>
             <div className="mb-5 flex items-start justify-between gap-4">
               <div>
-                <p className="eyebrow text-rose-600">Takibi sil</p>
+                <p className={`${eyebrowClass} text-rose-600`}>Takibi sil</p>
                 <h2 id={`lead-delete-title-${id}`} className="mt-1 text-xl font-black text-slate-950">Emin misiniz?</h2>
               </div>
               <button type="button" aria-label="Pencereyi kapat" onClick={() => setOpen(false)} className="rounded-xl px-3 py-1 text-2xl leading-none text-slate-300 transition hover:bg-slate-100 hover:text-slate-700">×</button>

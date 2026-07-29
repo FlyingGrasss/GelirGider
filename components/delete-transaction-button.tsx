@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { deleteTransactionAction } from "@/app/actions";
+import { eyebrowClass, modalBackdropClass, modalCardClass } from "@/lib/ui";
 
 export function DeleteTransactionButton({
   id,
@@ -24,7 +25,7 @@ export function DeleteTransactionButton({
 
       {open ? (
         <div
-          className="modal-backdrop"
+          className={modalBackdropClass}
           role="presentation"
           onMouseDown={(event) => {
             if (event.target === event.currentTarget) {
@@ -33,14 +34,14 @@ export function DeleteTransactionButton({
           }}
         >
           <div
-            className="modal-card max-w-md"
+            className={`${modalCardClass} max-w-md`}
             role="dialog"
             aria-modal="true"
             aria-labelledby={`delete-title-${id}`}
           >
             <div className="mb-5 flex items-start justify-between gap-4">
               <div>
-                <p className="eyebrow text-rose-600">Kayıt sil</p>
+                <p className={`${eyebrowClass} text-rose-600`}>Kayıt sil</p>
                 <h2
                   id={`delete-title-${id}`}
                   className="mt-1 text-xl font-black tracking-tight text-slate-950"

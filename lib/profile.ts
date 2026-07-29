@@ -3,6 +3,24 @@ export type ProfileFacilityInput = {
   url: string;
 };
 
+export const profileColorSchemes = [
+  { value: "forest", label: "Orman", description: "Yeşil ve doğal" },
+  { value: "midnight", label: "Gece", description: "Lacivert ve sakin" },
+  { value: "ocean", label: "Okyanus", description: "Mavi ve ferah" },
+  { value: "sand", label: "Kum", description: "Sıcak ve yumuşak" },
+  { value: "plum", label: "Erik", description: "Mor ve karakterli" },
+] as const;
+
+export type ProfileColorScheme = (typeof profileColorSchemes)[number]["value"];
+
+export function isProfileColorScheme(value: string): value is ProfileColorScheme {
+  return profileColorSchemes.some((scheme) => scheme.value === value);
+}
+
+export function normalizeProfileColorScheme(value: string | null | undefined): ProfileColorScheme {
+  return value && isProfileColorScheme(value) ? value : "forest";
+}
+
 export function normalizeSlug(value: string) {
   return value
     .trim()

@@ -4,6 +4,7 @@ import {
   normalizeHttpUrl,
   normalizeIban,
   normalizeSlug,
+  normalizeProfileColorScheme,
   type ProfileFacilityInput,
 } from "@/lib/profile";
 
@@ -16,6 +17,7 @@ export type ProfileFields = {
   name: string;
   title: string | null;
   title2: string | null;
+  colorScheme: ReturnType<typeof normalizeProfileColorScheme>;
   iban: string | null;
   ibanEnabled: boolean;
   callNumber: string | null;
@@ -160,6 +162,7 @@ export function parseProfileFields(formData: FormData): ParseResult<ProfileField
       name,
       title,
       title2,
+      colorScheme: normalizeProfileColorScheme(textValue(formData, "colorScheme")),
       iban,
       ibanEnabled: checkboxValue(formData, "ibanEnabled"),
       callNumber: textValue(formData, "callNumber").slice(0, 40) || null,
