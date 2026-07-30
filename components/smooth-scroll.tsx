@@ -9,12 +9,8 @@ export function SmoothScroll() {
       return;
     }
 
-    const lenis = new Lenis({
-      anchors: true,
-      autoRaf: true,
-      lerp: 0.1,
-      stopInertiaOnNavigate: true,
-    });
+    // Keep Lenis defaults; autoRaf is the only integration option we need here.
+    const lenis = new Lenis({ autoRaf: true });
 
     return () => lenis.destroy();
   }, []);

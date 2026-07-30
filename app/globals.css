@@ -20,7 +20,7 @@
 
 body {
   min-width: 320px;
-  background: var(--background);
+  background: #071512;
   color: var(--foreground);
 }
 
@@ -37,7 +37,7 @@ textarea {
 }
 
 .page-transition {
-  animation: page-enter 700ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation: page-enter 420ms cubic-bezier(0.22, 1, 0.36, 1) both;
   transform-origin: 50% 0;
 }
 
@@ -54,6 +54,26 @@ textarea {
 .page-nfc article {
   border-color: rgb(165 239 189 / 0.18) !important;
   background: rgb(7 31 21 / 0.72) !important;
+}
+
+.page-nfc section:nth-of-type(2) {
+  background-image: repeating-linear-gradient(135deg, rgb(165 239 189 / 0.035) 0 1px, transparent 1px 18px) !important;
+}
+
+.page-nfc section:nth-of-type(3) {
+  position: relative;
+}
+
+.page-nfc section:nth-of-type(3)::after {
+  position: absolute;
+  right: 8%;
+  top: 2rem;
+  width: 7rem;
+  height: 7rem;
+  border: 1px solid rgb(165 239 189 / 0.18);
+  border-radius: 9999px;
+  content: "";
+  pointer-events: none;
 }
 
 .page-digital {
@@ -75,6 +95,18 @@ textarea {
   letter-spacing: 0.012em;
 }
 
+.page-digital section:nth-of-type(2) {
+  background: linear-gradient(120deg, rgb(58 38 30 / 0.68), rgb(23 21 28 / 0.82)) !important;
+}
+
+.page-digital section:nth-of-type(3) > div > div:first-child {
+  box-shadow: 18px 18px 0 rgb(207 153 100 / 0.1);
+}
+
+.page-digital section:nth-of-type(4) {
+  background: linear-gradient(90deg, rgb(42 29 27 / 0.8), rgb(15 20 22 / 0.85)) !important;
+}
+
 .page-how {
   background-color: #07141a !important;
   background-image:
@@ -87,17 +119,27 @@ textarea {
   border-color: rgb(153 222 215 / 0.2) !important;
 }
 
+.page-how section:nth-of-type(2) {
+  background-image: linear-gradient(90deg, rgb(92 182 186 / 0.08), transparent 42%) !important;
+}
+
+.page-how section:nth-of-type(3) {
+  background-image: radial-gradient(circle at 92% 50%, rgb(92 182 186 / 0.1), transparent 20rem);
+}
+
+.page-how section:nth-of-type(4) article:first-child {
+  background: linear-gradient(145deg, rgb(21 80 74 / 0.75), rgb(9 37 36 / 0.8)) !important;
+}
+
 @keyframes page-enter {
   from {
-    opacity: 0;
-    transform: translateY(0.75rem) scale(0.992);
-    filter: blur(4px);
+    opacity: 0.92;
+    transform: translateY(0.5rem);
   }
 
   to {
     opacity: 1;
     transform: translateY(0) scale(1);
-    filter: blur(0);
   }
 }
 
