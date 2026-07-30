@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { Plus_Jakarta_Sans } from "next/font/google";
+import { PageTransition } from "@/components/page-transition";
+import { SmoothScroll } from "@/components/smooth-scroll";
 import "./globals.css";
 import { absoluteUrl, siteUrl } from "@/lib/site";
 
@@ -43,7 +45,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="tr">
-      <body className={`${plusJakartaSans.variable} font-sans antialiased`}>{children}</body>
+      <body className={`${plusJakartaSans.variable} font-sans antialiased`}>
+        <SmoothScroll />
+        <PageTransition>{children}</PageTransition>
+      </body>
     </html>
   );
 }

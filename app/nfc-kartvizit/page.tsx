@@ -63,7 +63,7 @@ export default function NfcCardPage() {
   };
 
   return (
-    <main className="relative isolate min-h-svh overflow-hidden bg-[#071512] text-[#f4f8f2]">
+    <main className="page-nfc relative isolate min-h-svh overflow-hidden text-[#f4f8f2]">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c") }} />
       <div aria-hidden="true" className="pointer-events-none absolute -right-40 top-24 -z-10 h-96 w-96 rounded-full bg-[#51d48d]/15 blur-[90px]" />
 
