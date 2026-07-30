@@ -16,7 +16,10 @@ type EditProfilePageProps = {
 export async function generateMetadata({ params }: EditProfilePageProps): Promise<Metadata> {
   const { id } = await params;
   const profile = await prisma.profile.findUnique({ where: { id }, select: { name: true } });
-  return { title: profile ? `${profile.name} düzenle | Yönetim` : "Profil düzenle | Yönetim" };
+  return {
+    title: profile ? `${profile.name} düzenle | Yönetim` : "Profil düzenle | Yönetim",
+    robots: { index: false, follow: false },
+  };
 }
 
 export default async function EditProfilePage({ params }: EditProfilePageProps) {

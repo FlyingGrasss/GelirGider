@@ -5,6 +5,7 @@ import { getCurrentMember, getCurrentSession } from "@/lib/auth-helpers";
 
 export const metadata: Metadata = {
   title: "Giriş | Gelir Gider",
+  robots: { index: false, follow: false },
 };
 
 export default async function SignInPage() {

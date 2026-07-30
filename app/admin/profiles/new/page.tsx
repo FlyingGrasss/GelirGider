@@ -7,6 +7,7 @@ import { eyebrowClass, panelClass } from "@/lib/ui";
 
 export const metadata: Metadata = {
   title: "Yeni profil | Yönetim",
+  robots: { index: false, follow: false },
 };
 
 export default async function NewProfilePage() {

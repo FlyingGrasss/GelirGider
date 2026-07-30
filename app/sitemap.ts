@@ -6,7 +6,7 @@ export const revalidate = 3600;
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const profiles = await prisma.profile.findMany({
-    select: { slug: true, updatedAt: true },
+    select: { slug: true, updatedAt: true, imageUrl: true, showImage: true },
     orderBy: { updatedAt: "desc" },
   });
 
@@ -23,11 +23,24 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: "monthly",
       priority: 0.9,
     },
+    {
+      url: absoluteUrl("/nfc-kartvizit"),
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.9,
+    },
+    {
+      url: absoluteUrl("/dijital-kartvizit"),
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.9,
+    },
     ...profiles.map((profile) => ({
       url: absoluteUrl(`/${profile.slug}`),
       lastModified: profile.updatedAt,
       changeFrequency: "weekly" as const,
       priority: 0.8,
+      images: profile.showImage && profile.imageUrl ? [profile.imageUrl] : undefined,
     })),
   ];
 }

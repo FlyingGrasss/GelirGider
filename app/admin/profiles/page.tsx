@@ -7,6 +7,7 @@ import { emptyStateClass, eyebrowClass, panelClass } from "@/lib/ui";
 
 export const metadata: Metadata = {
   title: "Profil kartları | Yönetim",
+  robots: { index: false, follow: false },
 };
 
 export default async function ProfilesPage() {

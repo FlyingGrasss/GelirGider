@@ -17,8 +17,17 @@ import { SiteFooter } from "@/components/site-footer";
 import { absoluteUrl } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: { absolute: "NFC Solutions Turkey | Temassız deneyimler" },
-  description: "Kartvizit, dijital profil ve temassız iletişim çözümleri.",
+  title: { absolute: "NFC Kartvizit ve Dijital Kartvizit | NFC Solutions Turkey" },
+  description: "Türkiye'de NFC kartvizit, dijital kartvizit ve temassız iletişim çözümleri. Özel tasarım, UV baskı ve tek dokunuşla paylaşım.",
+  alternates: { canonical: absoluteUrl("/") },
+  openGraph: {
+    title: "NFC Kartvizit ve Dijital Kartvizit | NFC Solutions Turkey",
+    description: "Türkiye'de NFC kartvizit, dijital kartvizit ve temassız iletişim çözümleri.",
+    url: absoluteUrl("/"),
+    type: "website",
+    siteName: "NFC Solutions Turkey",
+    images: [{ url: absoluteUrl("/icon.png"), width: 512, height: 512, alt: "NFC Solutions Turkey" }],
+  },
 };
 
 const container = "mx-auto w-[min(100%-3rem,75rem)]";
@@ -33,11 +42,24 @@ const arrowLink = "inline-flex items-center gap-2 text-[0.72rem] font-extrabold 
 export default function Home() {
   const jsonLd = {
     "@context": "https://schema.org",
-    "@type": "Organization",
-    name: "NFC Solutions Turkey",
-    url: absoluteUrl("/"),
-    logo: absoluteUrl("/icon.png"),
-    description: "NFC kartvizit, dijital kartvizit ve temassız iletişim çözümleri.",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": `${absoluteUrl("/")}#organization`,
+        name: "NFC Solutions Turkey",
+        url: absoluteUrl("/"),
+        logo: absoluteUrl("/icon.png"),
+        description: "NFC kartvizit, dijital kartvizit ve temassız iletişim çözümleri.",
+      },
+      {
+        "@type": "WebSite",
+        "@id": `${absoluteUrl("/")}#website`,
+        name: "NFC Solutions Turkey",
+        url: absoluteUrl("/"),
+        inLanguage: "tr-TR",
+        publisher: { "@id": `${absoluteUrl("/")}#organization` },
+      },
+    ],
   };
 
   return (
@@ -153,7 +175,10 @@ export default function Home() {
             <p className={kicker}><span className="block h-px w-7 bg-[#75d49a]" /> Size özel</p>
             <h3 className="mt-5 text-3xl font-extrabold leading-[1.06] tracking-[0.005em] text-white sm:text-5xl">Dijital Kartvizitiniz<br /><em className={accentText}>markanız kadar özgün.</em></h3>
             <p className="mt-5 max-w-md text-sm leading-7 text-[#d5efd9]/60">Hazır şablonlarla sınırlı kalmayın. Renkleri, bağlantıları ve deneyimi markanıza göre tasarlayalım.</p>
-            <Link href="/emre-bozkurt" className={`${arrowLink} mt-6`}>Örnek dijital kartviziti inceleyin <FaArrowRight /></Link>
+            <div className="mt-6 flex flex-wrap gap-x-5 gap-y-3">
+              <Link href="/emre-bozkurt" className={arrowLink}>Örnek dijital kartviziti inceleyin <FaArrowRight /></Link>
+              <Link href="/dijital-kartvizit" className={arrowLink}>Dijital kartvizit çözümünü inceleyin <FaArrowRight /></Link>
+            </div>
           </div>
           <div className="relative grid min-h-80 place-items-center overflow-hidden bg-[#071c12]/40">
             <div className="absolute h-56 w-56 rounded-full bg-[#65d792]/20 blur-3xl" />

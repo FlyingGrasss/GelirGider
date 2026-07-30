@@ -90,13 +90,14 @@ export async function generateMetadata({ params }: ProfilePageProps): Promise<Me
 
   const description = [profile.title, profile.title2].filter(Boolean).join(" — ") || `${profile.name} dijital kartviziti`;
   const url = absoluteUrl(`/${profile.slug}`);
+  const profileImage = profile.showImage && profile.imageUrl ? profile.imageUrl : absoluteUrl("/icon.png");
 
   return {
     title: profile.title ? `${profile.name} | ${profile.title}` : profile.name,
     description,
     alternates: { canonical: url },
-    openGraph: { type: "website", url, title: profile.name, description, images: [{ url: absoluteUrl("/icon.png"), width: 512, height: 512, alt: profile.name }] },
-    twitter: { card: "summary", title: profile.name, description, images: [absoluteUrl("/icon.png")] },
+    openGraph: { type: "website", url, title: profile.name, description, images: [{ url: profileImage, width: 512, height: 512, alt: profile.name }] },
+    twitter: { card: "summary", title: profile.name, description, images: [profileImage] },
   };
 }
 
@@ -143,6 +144,10 @@ export default async function ProfilePage({ params }: ProfilePageProps) {
       description: [profile.title, profile.title2].filter(Boolean).join(" — ") || undefined,
       image: profile.showImage ? profile.imageUrl || undefined : undefined,
       url: profileUrl,
+      sameAs: [
+        profile.instagramEnabled ? profile.instagramUrl : null,
+        profile.linkedinEnabled ? profile.linkedinUrl : null,
+      ].filter(Boolean),
     },
   };
 

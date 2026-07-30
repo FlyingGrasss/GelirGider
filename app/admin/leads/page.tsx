@@ -10,6 +10,7 @@ import { emptyStateClass, eyebrowClass, panelClass } from "@/lib/ui";
 
 export const metadata: Metadata = {
   title: "Takipler | Yönetim",
+  robots: { index: false, follow: false },
 };
 
 const dateFormatter = new Intl.DateTimeFormat("tr-TR", {

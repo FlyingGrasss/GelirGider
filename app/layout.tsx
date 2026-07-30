@@ -12,11 +12,10 @@ const plusJakartaSans = Plus_Jakarta_Sans({
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: "NFC Solutions Turkey | Temassız deneyimler",
+    default: "NFC Kartvizit ve Dijital Kartvizit | NFC Solutions Turkey",
     template: "%s | NFC Solutions Turkey",
   },
-  description: "NFC kartvizit, dijital kartvizit ve temassız iletişim çözümleri.",
-  keywords: ["NFC kartvizit", "dijital kartvizit", "dijital profil", "NFC Solutions Turkey"],
+  description: "Türkiye'de özel tasarım, UV baskı ve dijital profil seçenekleriyle NFC kartvizit ve dijital kartvizit çözümleri.",
   applicationName: "NFC Solutions Turkey",
   creator: "NFC Solutions Turkey",
   alternates: { canonical: absoluteUrl("/") },
@@ -25,14 +24,14 @@ export const metadata: Metadata = {
     locale: "tr_TR",
     url: siteUrl,
     siteName: "NFC Solutions Turkey",
-    title: "NFC Solutions Turkey | Temassız deneyimler",
-    description: "NFC kartvizit, dijital kartvizit ve temassız iletişim çözümleri.",
+    title: "NFC Kartvizit ve Dijital Kartvizit | NFC Solutions Turkey",
+    description: "Türkiye'de özel tasarım, UV baskı ve dijital profil seçenekleriyle NFC kartvizit ve dijital kartvizit çözümleri.",
     images: [{ url: absoluteUrl("/icon.png"), width: 512, height: 512, alt: "NFC Solutions Turkey" }],
   },
   twitter: {
     card: "summary",
-    title: "NFC Solutions Turkey | Temassız deneyimler",
-    description: "NFC kartvizit, dijital kartvizit ve temassız iletişim çözümleri.",
+    title: "NFC Kartvizit ve Dijital Kartvizit | NFC Solutions Turkey",
+    description: "Türkiye'de özel tasarım, UV baskı ve dijital profil seçenekleriyle NFC kartvizit ve dijital kartvizit çözümleri.",
     images: [absoluteUrl("/icon.png")],
   },
 };

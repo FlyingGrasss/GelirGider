@@ -11,6 +11,7 @@ import { emptyStateClass, eyebrowClass, panelClass } from "@/lib/ui";
 
 export const metadata: Metadata = {
   title: "Özet | Gelir Gider",
+  robots: { index: false, follow: false },
 };
 
 const currency = new Intl.NumberFormat("tr-TR", {

@@ -23,7 +23,10 @@ export async function generateMetadata({ params }: ProfileAdminPageProps): Promi
     select: { name: true },
   });
 
-  return { title: profile ? `${profile.name} yönetimi` : "Profil yönetimi" };
+  return {
+    title: profile ? `${profile.name} yönetimi` : "Profil yönetimi",
+    robots: { index: false, follow: false },
+  };
 }
 
 export default async function ProfileAdminPage({ params }: ProfileAdminPageProps) {

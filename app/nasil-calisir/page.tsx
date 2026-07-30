@@ -14,7 +14,7 @@ import { absoluteUrl } from "@/lib/site";
 import { SiteFooter } from "@/components/site-footer";
 
 export const metadata: Metadata = {
-  title: "Nasıl çalışır? | NFC kartvizit",
+  title: "NFC Kartvizit Nasıl Çalışır? | Türkiye",
   description: "NFC kartvizitin nasıl çalıştığını, üretim sürecini ve dijital kartvizit deneyimini keşfedin.",
   alternates: { canonical: absoluteUrl("/nasil-calisir") },
   openGraph: {
@@ -22,6 +22,13 @@ export const metadata: Metadata = {
     description: "NFC kartvizitin nasıl çalıştığını, üretim sürecini ve dijital kartvizit deneyimini keşfedin.",
     url: absoluteUrl("/nasil-calisir"),
     type: "website",
+    images: [{ url: absoluteUrl("/icon.png"), width: 512, height: 512, alt: "NFC Solutions Turkey" }],
+  },
+  twitter: {
+    card: "summary",
+    title: "NFC Kartvizit Nasıl Çalışır? | Türkiye",
+    description: "NFC kartvizitin nasıl çalıştığını, üretim sürecini ve dijital kartvizit deneyimini keşfedin.",
+    images: [absoluteUrl("/icon.png")],
   },
 };
 

@@ -24,6 +24,7 @@ export function ProductFlipCard({
   const [flipped, setFlipped] = useState(false);
   const [rotation, setRotation] = useState(0);
   const [dragging, setDragging] = useState(false);
+  const [hintVisible, setHintVisible] = useState(true);
   const dragStart = useRef<{ x: number; rotation: number } | null>(null);
 
   function handlePointerDown(event: ReactPointerEvent<HTMLDivElement>) {
@@ -33,6 +34,7 @@ export function ProductFlipCard({
 
     event.currentTarget.setPointerCapture(event.pointerId);
     dragStart.current = { x: event.clientX, rotation };
+    setHintVisible(false);
     setDragging(true);
   }
 
@@ -62,6 +64,7 @@ export function ProductFlipCard({
     }
 
     event.preventDefault();
+    setHintVisible(false);
     const nextFlipped = !flipped;
     setFlipped(nextFlipped);
     setRotation(nextFlipped ? 180 : 0);
@@ -92,9 +95,11 @@ export function ProductFlipCard({
             <Image src={backImage} alt={`${title} arka yüz`} fill draggable={false} sizes="(max-width: 768px) 90vw, 45vw" className="rounded-[2rem] object-cover" />
           </span>
         </span>
-        <span className="pointer-events-none absolute bottom-4 left-1/2 z-10 inline-flex -translate-x-1/2 items-center gap-2 whitespace-nowrap rounded-full border border-white/20 bg-[#061810]/75 px-3 py-2 text-[0.58rem] font-extrabold uppercase tracking-[0.1em] text-white/80 shadow-lg backdrop-blur-sm">
-          <FaArrowsRotate className="text-[#a5efbd]" /> Basılı tut · 360° çevir
-        </span>
+        {hintVisible ? (
+          <span className="pointer-events-none absolute bottom-4 left-1/2 z-10 inline-flex -translate-x-1/2 items-center gap-2 whitespace-nowrap rounded-full border border-white/20 bg-[#061810]/75 px-3 py-2 text-[0.58rem] font-extrabold uppercase tracking-[0.1em] text-white/80 shadow-lg backdrop-blur-sm">
+            <FaArrowsRotate className="text-[#a5efbd]" /> Basılı tut · 360° çevir
+          </span>
+        ) : null}
       </div>
       <div className="p-5">
         <div className="flex items-center justify-between gap-3">
