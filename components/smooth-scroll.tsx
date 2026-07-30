@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
-import Lenis from "lenis";
+import LocomotiveScroll from "locomotive-scroll";
 
 export function SmoothScroll() {
   useEffect(() => {
@@ -9,10 +9,9 @@ export function SmoothScroll() {
       return;
     }
 
-    // Keep Lenis defaults; autoRaf is the only integration option we need here.
-    const lenis = new Lenis({ autoRaf: true });
+    const scroll = new LocomotiveScroll();
 
-    return () => lenis.destroy();
+    return () => scroll.destroy();
   }, []);
 
   return null;
