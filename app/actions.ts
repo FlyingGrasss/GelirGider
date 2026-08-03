@@ -56,14 +56,34 @@ export async function signInAction(
       });
 
       if (existingUser) {
-        await auth.api.signInEmail({
-          body: {
-            email: SHARED_AUTH_EMAIL,
-            password,
-            rememberMe: true,
-          },
-          headers: requestHeaders,
-        });
+        try {
+          await auth.api.signInEmail({
+            body: {
+              email: SHARED_AUTH_EMAIL,
+              password,
+              rememberMe: true,
+            },
+            headers: requestHeaders,
+          });
+        } catch (_signInError) {
+          // If the APP_PASSWORD changed, sync Better Auth's password for the shared user
+          await auth.api.setPassword({
+            body: {
+              newPassword: password,
+              userId: existingUser.id,
+            },
+            headers: requestHeaders,
+          });
+
+          await auth.api.signInEmail({
+            body: {
+              email: SHARED_AUTH_EMAIL,
+              password,
+              rememberMe: true,
+            },
+            headers: requestHeaders,
+          });
+        }
       } else {
         await auth.api.signUpEmail({
           body: {
