@@ -66,17 +66,14 @@ export async function signInAction(
             headers: requestHeaders,
           });
         } catch (_signInError) {
-          // If the APP_PASSWORD changed, sync Better Auth's password for the shared user
-          await auth.api.setPassword({
-            body: {
-              newPassword: password,
-              userId: existingUser.id,
-            },
-            headers: requestHeaders,
+          // Password changed in APP_PASSWORD: clear stale user & recreate with new password
+          await prisma.user.delete({
+            where: { id: existingUser.id },
           });
 
-          await auth.api.signInEmail({
+          await auth.api.signUpEmail({
             body: {
+              name: "Gelir Gider",
               email: SHARED_AUTH_EMAIL,
               password,
               rememberMe: true,
